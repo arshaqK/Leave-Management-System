@@ -3,15 +3,38 @@ package leavemanagement
 class UrlMappings {
 
     static mappings = {
-        "/$namespace/$controller/$action?/$id?(.$format)?" {}
-        "/$controller/$action?/$id?(.$format)?"{
-            constraints {
-                // apply constraints here
-            }
+
+        "/"(controller: 'auth', action: 'login')
+
+        "/auth/login"(controller: 'auth', action: 'login')
+        "/auth/logout"(controller: 'auth', action: 'logout')
+
+        "/dashboard/$action?"(controller: 'dashboard')
+
+        "/employee/$action?/$id?"(controller: 'employee')
+
+        "/leave/$action?/$id?"(controller: 'leave')
+
+        "/report/$action?"(controller: 'report')
+
+        "/api/employees"(controller: 'employeeApi') {
+            action = [GET: 'index', POST: 'save']
+        }
+        "/api/employees/$id"(controller: 'employeeApi') {
+            action = [GET: 'show', PUT: 'update', DELETE: 'delete']
         }
 
-        "/"(view:"/index")
-        "500"(view:'/error')
-        "404"(view:'/notFound')
+        "/api/leaves"(controller: 'leaveApi') {
+            action = [GET: 'index', POST: 'save']
+        }
+        "/api/leaves/$id/approve"(controller: 'leaveApi') {
+            action = [PUT: 'approve']
+        }
+        "/api/leaves/$id/reject"(controller: 'leaveApi') {
+            action = [PUT: 'reject']
+        }
+
+        "500"(view: '/error')
+        "404"(view: '/notFound')
     }
 }

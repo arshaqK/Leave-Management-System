@@ -86,6 +86,89 @@ grails:
                 scriptlets: html
                 taglib: none
                 staticparts: none
+    plugin:
+        springsecurity:
+            userLookup:
+                userDomainClassName: 'com.leavemanagement.User'
+                authorityJoinClassName: 'com.leavemanagement.UserRole'
+            authority:
+                className: 'com.leavemanagement.Role'
+            logout:
+                postOnly: false
+                afterLogoutUrl: '/auth/login'
+            auth:
+                loginFormUrl: '/auth/login'
+            failureHandler:
+                defaultFailureUrl: '/auth/login?error=true'
+            successHandler:
+                defaultTargetUrl: '/dashboard/index'
+            controllerAnnotations:
+                staticRules:
+                    - pattern: /
+                      access:
+                          - permitAll
+                    - pattern: /error
+                      access:
+                          - permitAll
+                    - pattern: /auth/**
+                      access:
+                          - permitAll
+                    - pattern: /assets/**
+                      access:
+                          - permitAll
+                    - pattern: /**/js/**
+                      access:
+                          - permitAll
+                    - pattern: /**/css/**
+                      access:
+                          - permitAll
+                    - pattern: /**/images/**
+                      access:
+                          - permitAll
+                    - pattern: /**/favicon.ico
+                      access:
+                          - permitAll
+                    - pattern: /employee/**
+                      access:
+                          - ROLE_ADMIN
+                    - pattern: /api/employees/**
+                      access:
+                          - ROLE_ADMIN
+                    - pattern: /dashboard/**
+                      access:
+                          - ROLE_ADMIN
+                          - ROLE_EMPLOYEE
+                    - pattern: /leave/**
+                      access:
+                          - ROLE_ADMIN
+                          - ROLE_EMPLOYEE
+                    - pattern: /api/leaves/**
+                      access:
+                          - ROLE_ADMIN
+                          - ROLE_EMPLOYEE
+                    - pattern: /report/**
+                      access:
+                          - ROLE_ADMIN
+                    - pattern: /login/**
+                      access:
+                          - permitAll
+                    - pattern: /logout/**
+                      access:
+                          - permitAll
+            filterChain:
+                chainMap:
+                    - pattern: /assets/**
+                      filters: none
+                    - pattern: /**/js/**
+                      filters: none
+                    - pattern: /**/css/**
+                      filters: none
+                    - pattern: /**/images/**
+                      filters: none
+                    - pattern: /**/favicon.ico
+                      filters: none
+                    - pattern: /**
+                      filters: JOINED_FILTERS
 
 environments:
     development:
@@ -118,51 +201,3 @@ environments:
                 maxActive: 50
                 minIdle: 5
                 maxIdle: 25
----
-# Added by the Spring Security Core plugin:
-grails:
-    plugin:
-        springsecurity:
-            userLookup:
-                userDomainClassName: 'com.leavemanagement.User'
-                authorityJoinClassName: 'com.leavemanagement.UserRole'
-        authority:
-            className: 'com.leavemanagement.Role'
-            controllerAnnotations:
-                staticRules:
-                    - pattern: /
-                      access: ['permitAll']
-                    - pattern: /error
-                      access: ['permitAll']
-                    - pattern: /index
-                      access: ['permitAll']
-                    - pattern: /index.gsp
-                      access: ['permitAll']
-                    - pattern: /shutdown
-                      access: ['permitAll']
-                    - pattern: /assets/**
-                      access: ['permitAll']
-                    - pattern: /**/js/**
-                      access: ['permitAll']
-                    - pattern: /**/css/**
-                      access: ['permitAll']
-                    - pattern: /**/images/**
-                      access: ['permitAll']
-                    - pattern: /**/favicon.ico
-                      access: ['permitAll']
-
-            filterChain:
-                chainMap:
-                    - pattern: /assets/**
-                      filters: none
-                    - pattern: /**/js/**
-                      filters: none
-                    - pattern: /**/css/**
-                      filters: none
-                    - pattern: /**/images/**
-                      filters: none
-                    - pattern: /**/favicon.ico
-                      filters: none
-                    - pattern: /**
-                      filters: JOINED_FILTERS
-
