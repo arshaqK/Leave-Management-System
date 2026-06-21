@@ -30,8 +30,8 @@ class LeaveApiController {
 
             LeaveRequest leave = leaveService.apply([
                     leaveType: json.leaveType,
-                    startDate: Date.parse('yyyy-MM-dd', json.startDate),
-                    endDate  : Date.parse('yyyy-MM-dd', json.endDate),
+                    startDate: java.sql.Date.valueOf(json.startDate),
+                    endDate  : java.sql.Date.valueOf(json.endDate),
                     reason   : json.reason
             ], employee)
 

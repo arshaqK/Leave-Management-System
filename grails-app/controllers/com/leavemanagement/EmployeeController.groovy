@@ -28,7 +28,7 @@ class EmployeeController {
     def save() {
         try {
             Date joiningDate = params.joiningDate ?
-                Date.parse('yyyy-MM-dd', params.joiningDate) : new Date()
+                java.sql.Date.valueOf(params.joiningDate) : new Date()      
 
             Employee employee = employeeService.create([
                     employeeId : params.employeeId,
@@ -62,7 +62,7 @@ class EmployeeController {
     def update(Long id) {
         try {
             Date joiningDate = params.joiningDate ?
-                Date.parse('yyyy-MM-dd', params.joiningDate) : null
+                java.sql.Date.valueOf(params.joiningDate) : null
 
             Employee employee = employeeService.update(id, [
                     fullName   : params.fullName,

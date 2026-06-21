@@ -57,7 +57,6 @@ class EmployeeService {
                     action:      'CREATE',
                     performedBy: currentUser,
                     details:     "Created employee: ${employee.fullName}",
-                    dateCreated: new Date()
             ).save(failOnError: true)
         }
 
@@ -85,7 +84,6 @@ class EmployeeService {
                     action:      'UPDATE',
                     performedBy: currentUser,
                     details:     "Updated employee: ${employee.fullName}",
-                    dateCreated: new Date()
             ).save(failOnError: true)
         }
 

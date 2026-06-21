@@ -24,8 +24,8 @@ class LeaveController {
             User currentUser = springSecurityService.currentUser
             Employee employee = employeeService.getByUser(currentUser)
 
-            Date startDate = Date.parse('yyyy-MM-dd', params.startDate)
-            Date endDate   = Date.parse('yyyy-MM-dd', params.endDate)
+            Date startDate = java.sql.Date.valueOf(params.startDate)
+            Date endDate   = java.sql.Date.valueOf(params.endDate)
 
             leaveService.apply([
                     leaveType: params.leaveType,

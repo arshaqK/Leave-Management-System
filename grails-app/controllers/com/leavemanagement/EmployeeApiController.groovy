@@ -30,7 +30,7 @@ class EmployeeApiController {
                     fullName   : json.fullName,
                     email      : json.email,
                     department : json.department,
-                    joiningDate: Date.parse('yyyy-MM-dd', json.joiningDate),
+                    joiningDate: java.sql.Date.valueOf(json.joiningDate),
                     status     : json.status ?: 'Active',
                     username   : json.username,
                     password   : json.password
@@ -50,7 +50,7 @@ class EmployeeApiController {
                     fullName   : json.fullName,
                     email      : json.email,
                     department : json.department,
-                    joiningDate: json.joiningDate ? Date.parse('yyyy-MM-dd', json.joiningDate) : null,
+                    joiningDate: java.sql.Date.valueOf(json.joiningDate),
                     status     : json.status
             ])
             render employee as JSON

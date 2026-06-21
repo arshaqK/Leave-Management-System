@@ -32,5 +32,9 @@ class Employee {
         table 'employees'
     }
 
+    String getJoiningDateFormatted() {
+        joiningDate ? new java.text.SimpleDateFormat('yyyy-MM-dd').format(joiningDate) : ''
+    }
+
     String toString() { fullName }
 }

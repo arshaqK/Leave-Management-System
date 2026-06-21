@@ -6,39 +6,34 @@ import grails.plugin.springsecurity.annotation.Secured
 class ReportController {
 
     def index() {
-        // Leaves by department
-        def leavesByDepartment = LeaveRequest.createCriteria().list {
-            join 'employee'
-            projections {
-                groupProperty('employee.department')
-                count('id')
-            }
-        }
+        // Leaves by department using HQL
+        def leavesByDepartment = LeaveRequest.executeQuery(
+            """SELECT e.department, COUNT(l.id)
+               FROM LeaveRequest l
+               JOIN l.employee e
+               GROUP BY e.department
+               ORDER BY COUNT(l.id) DESC"""
+        )
 
         // Leaves by month (current year)
-        def currentYear = new Date()[Calendar.YEAR]
-        def leavesByMonth = LeaveRequest.createCriteria().list {
-            sqlRestriction("YEAR(start_date) = ${currentYear}")
-            projections {
-                sqlGroupProjection(
-                    'MONTH(start_date) as month, COUNT(*) as total',
-                    'MONTH(start_date)',
-                    ['month', 'total'],
-                    [org.hibernate.type.StandardBasicTypes.INTEGER,
-                     org.hibernate.type.StandardBasicTypes.LONG]
-                )
-            }
-        }
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR)
+        def leavesByMonth = LeaveRequest.executeQuery(
+            """SELECT MONTH(l.startDate), COUNT(l.id)
+               FROM LeaveRequest l
+               WHERE YEAR(l.startDate) = :year
+               GROUP BY MONTH(l.startDate)
+               ORDER BY MONTH(l.startDate)""",
+            [year: currentYear]
+        )
 
-        // Top employees by leave usage
-        def topEmployees = LeaveRequest.createCriteria().list {
-            projections {
-                groupProperty('employee')
-                count('id', 'total')
-            }
-            order('total', 'desc')
-            maxResults(10)
-        }
+        // Top 10 employees by leave usage
+        def topEmployees = LeaveRequest.executeQuery(
+            """SELECT l.employee, COUNT(l.id)
+               FROM LeaveRequest l
+               GROUP BY l.employee
+               ORDER BY COUNT(l.id) DESC""",
+            [max: 10]
+        )
 
         [
             leavesByDepartment: leavesByDepartment,
