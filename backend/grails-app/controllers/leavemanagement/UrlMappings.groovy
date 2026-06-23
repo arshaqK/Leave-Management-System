@@ -38,6 +38,9 @@ class UrlMappings {
             action = [PUT: 'cancel']
         }
 
+        "/api/audit"(controller: 'auditApi', action: 'index')
+        "/api/audit/all"(controller: 'auditApi', action: 'all')
+        
         "/api/me"(controller: 'authApi', action: 'me')
         "/api/dashboard/admin"(controller: 'dashboardApi', action: 'admin')
         "/api/dashboard/employee"(controller: 'dashboardApi', action: 'employee')

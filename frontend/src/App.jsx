@@ -11,6 +11,7 @@ import LeaveApply from './pages/leaves/LeaveApply'
 import LeavePending from './pages/leaves/LeavePending'
 import Reports from './pages/reports/Reports'
 import Navbar from './components/Navbar'
+import AuditLogPage from './pages/audit/AuditLog'
 
 function PrivateRoute({ children, roles }) {
   const { user, loading } = useAuth()
@@ -46,6 +47,12 @@ export default function App() {
           <Route path="/dashboard/employee" element={
             <PrivateRoute roles={['ROLE_EMPLOYEE']}>
               <Navbar /><EmployeeDashboard />
+            </PrivateRoute>
+          } />
+
+          <Route path="/audit" element={
+            <PrivateRoute roles={['ROLE_ADMIN']}>
+              <Navbar /><AuditLogPage />
             </PrivateRoute>
           } />
 

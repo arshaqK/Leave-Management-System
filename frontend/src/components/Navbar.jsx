@@ -39,6 +39,10 @@ export default function Navbar() {
                             style={{ ...styles.link, ...(isActive('/reports') ? styles.activeLink : {}) }}>
                             Reports
                         </Link>
+                        <Link to="/audit"
+                            style={{ ...styles.link, ...(isActive('/audit') ? styles.activeLink : {}) }}>
+                            Audit Log
+                        </Link>
                     </>}
                     {!isAdmin && <>
                         <Link to="/leaves"
