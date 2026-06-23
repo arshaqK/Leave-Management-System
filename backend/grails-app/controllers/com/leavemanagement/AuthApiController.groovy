@@ -17,11 +17,12 @@ class AuthApiController {
         }
 
         render([
-                id      : currentUser.id,
-                username: currentUser.username,
-                role    : isAdmin ? 'ROLE_ADMIN' : 'ROLE_EMPLOYEE',
-                fullName: employee?.fullName,
-                employeeId: employee?.id
+                id        : currentUser.id,
+                username  : currentUser.username,
+                role      : isAdmin ? 'ROLE_ADMIN' : 'ROLE_EMPLOYEE',
+                fullName  : employee?.fullName,
+                employeeId: employee?.id,
+                status    : employee?.status
         ] as JSON)
     }
 }

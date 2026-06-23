@@ -19,12 +19,16 @@ export default function Login() {
             if (user.role === 'ROLE_ADMIN') navigate('/dashboard/admin')
             else navigate('/dashboard/employee')
         } catch (err) {
-            setError('Invalid username or password')
+            const status = err.response?.status
+            if (status === 403) {
+                setError('Your account has been deactivated. Please contact your administrator.')
+            } else {
+                setError('Invalid username or password.')
+            }
         } finally {
             setLoading(false)
         }
     }
-
     return (
         <div style={styles.container}>
             {/* Left Panel */}

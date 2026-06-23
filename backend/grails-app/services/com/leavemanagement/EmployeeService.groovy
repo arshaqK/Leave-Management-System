@@ -69,13 +69,18 @@ class EmployeeService {
 
         if (!employee) throw new RuntimeException("Employee not found with id: ${id}")
 
-        employee.fullName   = params.fullName   ?: employee.fullName
-        employee.email      = params.email      ?: employee.email
-        employee.department = params.department ?: employee.department
+        employee.fullName    = params.fullName   ?: employee.fullName
+        employee.email       = params.email      ?: employee.email
+        employee.department  = params.department ?: employee.department
         employee.joiningDate = params.joiningDate ?: employee.joiningDate
-        employee.status     = params.status     ?: employee.status
-        employee.modifiedBy = currentUser
+        employee.status      = params.status     ?: employee.status
+        employee.modifiedBy  = currentUser
         employee.save(failOnError: true)
+
+        // Sync user enabled flag with employee status
+        User user = employee.user
+        user.enabled = (employee.status == 'Active')
+        user.save(failOnError: true)
 
         AuditLog.withNewTransaction {
             new AuditLog(
@@ -84,6 +89,7 @@ class EmployeeService {
                     action:      'UPDATE',
                     performedBy: currentUser,
                     details:     "Updated employee: ${employee.fullName}",
+                    dateCreated: new Date()
             ).save(failOnError: true)
         }
 
@@ -99,6 +105,11 @@ class EmployeeService {
         employee.status     = 'Inactive'
         employee.modifiedBy = currentUser
         employee.save(failOnError: true)
+
+        // Disable the user account so they cannot login
+        User user = employee.user
+        user.enabled = false
+        user.save(failOnError: true)
 
         AuditLog.withNewTransaction {
             new AuditLog(
