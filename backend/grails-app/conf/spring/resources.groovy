@@ -23,5 +23,4 @@ beans = {
         filter = new CorsFilter(source)
         order = Ordered.HIGHEST_PRECEDENCE
     }
-    userPasswordEncoderListener(com.leavemanagement.UserPasswordEncoderListener)
 }

@@ -8,4 +8,20 @@ const api = axios.create({
     }
 })
 
+api.interceptors.response.use(
+    (response) => {
+        if (response.request?.responseURL && response.request.responseURL.includes('/auth/login')) {
+            localStorage.removeItem('user')
+            if (!window.location.pathname.includes('/login')) {
+                window.location.href = '/login'
+            }
+            return Promise.reject(new Error('Unauthorized - Redirected to login'))
+        }
+        return response
+    },
+    (error) => {
+        return Promise.reject(error)
+    }
+)
+
 export default api

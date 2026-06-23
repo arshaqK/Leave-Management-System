@@ -8,6 +8,8 @@ grails.plugin.springsecurity.logout.afterLogoutUrl = '/auth/login'
 grails.plugin.springsecurity.auth.loginFormUrl = '/auth/login'
 grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/auth/login?error=true'
 grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/dashboard/index'
+grails.plugin.springsecurity.password.algorithm = 'bcrypt'
+grails.plugin.springsecurity.password.bcrypt.logrounds = 10
 
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     [pattern: '/',                 access: ['permitAll']],

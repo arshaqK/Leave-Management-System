@@ -114,9 +114,9 @@ export default function AdminDashboard() {
                     <h2 style={styles.cardTitle}>Activity Summary</h2>
                     <div style={styles.summaryGrid}>
                         {[
-                            { label: 'Employee Creates', value: auditLogs.filter(l => l.entityName === 'Employee' && l.action === 'CREATE').length, icon: '👤' },
-                            { label: 'Employee Updates', value: auditLogs.filter(l => l.entityName === 'Employee' && l.action === 'UPDATE').length, icon: '✏️' },
-                            { label: 'Leave Actions', value: auditLogs.filter(l => l.entityName === 'LeaveRequest').length, icon: '📅' },
+                            { label: 'Employees Created', value: auditLogs.filter(l => l.entityName === 'Employee' && l.action === 'CREATE').length, icon: '👤' },
+                            { label: 'Employees Updated', value: auditLogs.filter(l => l.entityName === 'Employee' && l.action === 'UPDATE').length, icon: '✏️' },
+                            { label: 'Leave Requests Handled', value: auditLogs.filter(l => l.entityName === 'LeaveRequest').length, icon: '📅' },
                         ].map(item => (
                             <div key={item.label} style={styles.summaryItem}>
                                 <span style={styles.summaryIcon}>{item.icon}</span>
