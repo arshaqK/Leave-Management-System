@@ -41,7 +41,7 @@ export default function EmployeeCreate() {
             </div>
 
             <div style={styles.card}>
-                {error && <div style={styles.errorAlert}>⚠️ {error}</div>}
+                {error && <div style={styles.errorAlert}>{error}</div>}
                 <form onSubmit={handleSubmit}>
                     <div style={styles.sectionTitle}>Employee Information</div>
                     <div style={styles.grid2}>
@@ -70,9 +70,9 @@ export default function EmployeeCreate() {
                         <div style={styles.formGroup}>
                             <label style={styles.label}>Status</label>
                             <select name="status" value={form.status}
-                                onChange={handleChange} style={styles.input}>
-                                <option value="Active">Active</option>
-                                <option value="Inactive">Inactive</option>
+                                onChange={handleChange} style={{ ...styles.input, background: '#1a365d', color: '#ffffff' }}>
+                                <option value="Active" style={{ background: '#1a365d', color: '#ffffff' }}>Active</option>
+                                <option value="Inactive" style={{ background: '#1a365d', color: '#ffffff' }}>Inactive</option>
                             </select>
                         </div>
                     </div>

@@ -62,7 +62,7 @@ export default function LeavePending() {
                             {leaves.length === 0 ? (
                                 <tr>
                                     <td colSpan="8" style={styles.empty}>
-                                        No pending requests 🎉
+                                        No pending requests
                                     </td>
                                 </tr>
                             ) : leaves.map(leave => (
@@ -89,11 +89,11 @@ export default function LeavePending() {
                                         <div style={styles.actions}>
                                             <button style={styles.btnApprove}
                                                 onClick={() => { setModal({ type: 'approve', leave }); setRemarks('') }}>
-                                                ✓ Approve
+                                                Approve
                                             </button>
                                             <button style={styles.btnReject}
                                                 onClick={() => { setModal({ type: 'reject', leave }); setRemarks('') }}>
-                                                ✕ Reject
+                                                Reject
                                             </button>
                                         </div>
                                     </td>
@@ -109,7 +109,7 @@ export default function LeavePending() {
                 <div style={styles.overlay}>
                     <div style={styles.modalCard}>
                         <h3 style={styles.modalTitle}>
-                            {modal.type === 'approve' ? '✓ Approve Leave' : '✕ Reject Leave'}
+                            {modal.type === 'approve' ? 'Approve Leave' : 'Reject Leave'}
                         </h3>
                         <p style={styles.modalDesc}>
                             {modal.type === 'approve' ? 'Approving' : 'Rejecting'} leave request for{' '}

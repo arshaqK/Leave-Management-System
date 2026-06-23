@@ -26,10 +26,10 @@ export default function EmployeeDashboard() {
     if (loading) return <div style={styles.loading}>Loading...</div>
 
     const statCards = [
-        { label: 'Total Leaves', value: stats?.totalLeaves ?? 0, icon: '📅', color: '#3b82f6' },
-        { label: 'Pending', value: stats?.pendingLeaves ?? 0, icon: '⏳', color: '#f59e0b' },
-        { label: 'Approved', value: stats?.approvedLeaves ?? 0, icon: '✅', color: '#22c55e' },
-        { label: 'Rejected', value: stats?.rejectedLeaves ?? 0, icon: '❌', color: '#ef4444' },
+        { label: 'Total Leaves', value: stats?.totalLeaves ?? 0 },
+        { label: 'Pending', value: stats?.pendingLeaves ?? 0 },
+        { label: 'Approved', value: stats?.approvedLeaves ?? 0 },
+        { label: 'Rejected', value: stats?.rejectedLeaves ?? 0 },
     ]
 
     const statusBadge = (status) => {
@@ -53,7 +53,7 @@ export default function EmployeeDashboard() {
         <div style={styles.page}>
             <div style={styles.header}>
                 <div>
-                    <h1 style={styles.title}>Welcome back, {user?.fullName?.split(' ')[0]} 👋</h1>
+                    <h1 style={styles.title}>Welcome back, {user?.fullName?.split(' ')[0]}</h1>
                     <p style={styles.subtitle}>Here's your leave summary</p>
                 </div>
                 <button style={styles.btnPrimary} onClick={() => navigate('/leaves/apply')}>
@@ -68,9 +68,6 @@ export default function EmployeeDashboard() {
                         <div style={styles.statLeft}>
                             <p style={styles.statLabel}>{card.label}</p>
                             <p style={styles.statValue}>{card.value}</p>
-                        </div>
-                        <div style={{ ...styles.statIconBox, background: `${card.color}22`, border: `1px solid ${card.color}44` }}>
-                            <span style={styles.statIcon}>{card.icon}</span>
                         </div>
                     </div>
                 ))}

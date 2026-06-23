@@ -47,16 +47,16 @@ export default function LeaveApply() {
             </div>
 
             <div style={styles.card}>
-                {error && <div style={styles.errorAlert}>⚠️ {error}</div>}
+                {error && <div style={styles.errorAlert}>{error}</div>}
                 <form onSubmit={handleSubmit}>
                     <div style={styles.formGroup}>
                         <label style={styles.label}>Leave Type</label>
                         <select name="leaveType" value={form.leaveType}
-                            onChange={handleChange} required style={styles.input}>
-                            <option value="">— Select type —</option>
-                            <option value="Annual">Annual</option>
-                            <option value="Sick">Sick</option>
-                            <option value="Casual">Casual</option>
+                            onChange={handleChange} required style={{ ...styles.input, background: '#1a365d', color: '#ffffff' }}>
+                            <option value="" style={{ background: '#1a365d', color: '#ffffff' }}>— Select type —</option>
+                            <option value="Annual" style={{ background: '#1a365d', color: '#ffffff' }}>Annual</option>
+                            <option value="Sick" style={{ background: '#1a365d', color: '#ffffff' }}>Sick</option>
+                            <option value="Casual" style={{ background: '#1a365d', color: '#ffffff' }}>Casual</option>
                         </select>
                     </div>
 

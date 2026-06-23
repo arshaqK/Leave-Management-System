@@ -65,19 +65,19 @@ export default function AuditLogPage() {
                 <select
                     value={filter.action}
                     onChange={e => setFilter({ ...filter, action: e.target.value })}
-                    style={styles.select}>
-                    <option value="">All Actions</option>
-                    <option value="CREATE">CREATE</option>
-                    <option value="UPDATE">UPDATE</option>
-                    <option value="DELETE">DELETE</option>
+                    style={{ ...styles.select, background: '#1a365d', color: '#ffffff' }}>
+                    <option value="" style={{ background: '#1a365d', color: '#ffffff' }}>All Actions</option>
+                    <option value="CREATE" style={{ background: '#1a365d', color: '#ffffff' }}>CREATE</option>
+                    <option value="UPDATE" style={{ background: '#1a365d', color: '#ffffff' }}>UPDATE</option>
+                    <option value="DELETE" style={{ background: '#1a365d', color: '#ffffff' }}>DELETE</option>
                 </select>
                 <select
                     value={filter.entity}
                     onChange={e => setFilter({ ...filter, entity: e.target.value })}
-                    style={styles.select}>
-                    <option value="">All Entities</option>
-                    <option value="Employee">Employee</option>
-                    <option value="LeaveRequest">LeaveRequest</option>
+                    style={{ ...styles.select, background: '#1a365d', color: '#ffffff' }}>
+                    <option value="" style={{ background: '#1a365d', color: '#ffffff' }}>All Entities</option>
+                    <option value="Employee" style={{ background: '#1a365d', color: '#ffffff' }}>Employee</option>
+                    <option value="LeaveRequest" style={{ background: '#1a365d', color: '#ffffff' }}>LeaveRequest</option>
                 </select>
             </div>
 

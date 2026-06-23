@@ -31,7 +31,7 @@ export default function Reports() {
             <div style={styles.grid2}>
                 {/* Leaves by Department */}
                 <div style={styles.card}>
-                    <h2 style={styles.cardTitle}>📊 Leaves by Department</h2>
+                    <h2 style={styles.cardTitle}>Leaves by Department</h2>
                     <div style={styles.chartArea}>
                         {data?.leavesByDepartment?.length === 0 ? (
                             <p style={styles.noData}>No data available</p>
@@ -53,7 +53,7 @@ export default function Reports() {
 
                 {/* Leaves by Month */}
                 <div style={styles.card}>
-                    <h2 style={styles.cardTitle}>📅 Leaves by Month</h2>
+                    <h2 style={styles.cardTitle}>Leaves by Month</h2>
                     <div style={styles.chartArea}>
                         {data?.leavesByMonth?.length === 0 ? (
                             <p style={styles.noData}>No data available</p>
@@ -76,7 +76,7 @@ export default function Reports() {
 
             {/* Top Employees */}
             <div style={styles.card}>
-                <h2 style={styles.cardTitle}>🏆 Top Employees by Leave Usage</h2>
+                <h2 style={styles.cardTitle}>Top Employees by Leave Usage</h2>
                 <div style={styles.tableWrapper}>
                     <table style={styles.table}>
                         <thead>

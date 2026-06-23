@@ -35,7 +35,6 @@ export default function Login() {
             <div style={styles.leftPanel}>
                 <div style={styles.leftContent}>
                     <div style={styles.logoArea}>
-                        <span style={styles.logoIcon}>📅</span>
                         <span style={styles.logoText}>LeaveMS</span>
                     </div>
                     <h1 style={styles.heroTitle}>
@@ -120,7 +119,7 @@ export default function Login() {
 
                     {error && (
                         <div style={styles.errorAlert}>
-                            <span>⚠️</span> {error}
+                            {error}
                         </div>
                     )}
 
@@ -162,10 +161,6 @@ export default function Login() {
                             {loading ? 'Signing in...' : 'Sign in →'}
                         </button>
                     </form>
-
-                    <p style={styles.hint}>
-                        Default: <code style={styles.code}>admin / admin123</code>
-                    </p>
                 </div>
             </div>
         </div>
@@ -179,7 +174,7 @@ const styles = {
         backgroundColor: '#0f172a',
     },
     leftPanel: {
-        flex: 1,
+        flex: '0 0 65%',
         background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)',
         display: 'flex',
         flexDirection: 'column',
@@ -259,12 +254,11 @@ const styles = {
         zIndex: 1,
     },
     rightPanel: {
-        width: '480px',
+        flex: '0 0 35%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         padding: '2rem',
-        flexShrink: 0,
     },
     formCard: {
         width: '100%',

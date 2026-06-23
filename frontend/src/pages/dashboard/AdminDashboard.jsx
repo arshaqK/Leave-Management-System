@@ -24,10 +24,10 @@ export default function AdminDashboard() {
     if (loading) return <div style={styles.loading}>Loading...</div>
 
     const statCards = [
-        { label: 'Total Employees', value: stats?.totalEmployees ?? 0, icon: '👥', color: '#3b82f6' },
-        { label: 'Active Employees', value: stats?.activeEmployees ?? 0, icon: '✅', color: '#22c55e' },
-        { label: 'Pending Requests', value: stats?.pendingLeaves ?? 0, icon: '⏳', color: '#f59e0b' },
-        { label: 'Approved This Month', value: stats?.approvedThisMonth ?? 0, icon: '📋', color: '#06b6d4' },
+        { label: 'Total Employees', value: stats?.totalEmployees ?? 0 },
+        { label: 'Active Employees', value: stats?.activeEmployees ?? 0 },
+        { label: 'Pending Requests', value: stats?.pendingLeaves ?? 0 },
+        { label: 'Approved This Month', value: stats?.approvedThisMonth ?? 0 },
     ]
 
     const actionColor = (action) => {
@@ -73,13 +73,6 @@ export default function AdminDashboard() {
                             <p style={styles.statLabel}>{card.label}</p>
                             <p style={styles.statValue}>{card.value}</p>
                         </div>
-                        <div style={{
-                            ...styles.statIconBox,
-                            background: `${card.color}22`,
-                            border: `1px solid ${card.color}44`
-                        }}>
-                            <span style={styles.statIcon}>{card.icon}</span>
-                        </div>
                     </div>
                 ))}
             </div>
@@ -90,15 +83,12 @@ export default function AdminDashboard() {
                     <h2 style={styles.cardTitle}>Quick Actions</h2>
                     <div style={styles.actionsGrid}>
                         {[
-                            { label: 'Manage Employees', desc: 'View, edit or deactivate employees', icon: '👥', path: '/employees', color: '#3b82f6' },
-                            { label: 'Leave Requests', desc: `${stats?.pendingLeaves ?? 0} pending approvals`, icon: '📋', path: '/leaves/pending', color: '#f59e0b' },
-                            { label: 'Reports', desc: 'Leaves by department, month, usage', icon: '📊', path: '/reports', color: '#22c55e' },
+                            { label: 'Manage Employees', desc: 'View, edit or deactivate employees', path: '/employees', color: '#3b82f6' },
+                            { label: 'Leave Requests', desc: `${stats?.pendingLeaves ?? 0} pending approvals`, path: '/leaves/pending', color: '#f59e0b' },
+                            { label: 'Reports', desc: 'Leaves by department, month, usage', path: '/reports', color: '#22c55e' },
                         ].map(action => (
                             <div key={action.label} style={styles.actionCard}
                                 onClick={() => navigate(action.path)}>
-                                <div style={{ ...styles.actionIcon, background: `${action.color}22` }}>
-                                    <span>{action.icon}</span>
-                                </div>
                                 <div style={{ flex: 1 }}>
                                     <p style={styles.actionLabel}>{action.label}</p>
                                     <p style={styles.actionDesc}>{action.desc}</p>
@@ -114,12 +104,11 @@ export default function AdminDashboard() {
                     <h2 style={styles.cardTitle}>Activity Summary</h2>
                     <div style={styles.summaryGrid}>
                         {[
-                            { label: 'Employees Created', value: auditLogs.filter(l => l.entityName === 'Employee' && l.action === 'CREATE').length, icon: '👤' },
-                            { label: 'Employees Updated', value: auditLogs.filter(l => l.entityName === 'Employee' && l.action === 'UPDATE').length, icon: '✏️' },
-                            { label: 'Leave Requests Handled', value: auditLogs.filter(l => l.entityName === 'LeaveRequest').length, icon: '📅' },
+                            { label: 'Employees Created', value: auditLogs.filter(l => l.entityName === 'Employee' && l.action === 'CREATE').length },
+                            { label: 'Employees Updated', value: auditLogs.filter(l => l.entityName === 'Employee' && l.action === 'UPDATE').length },
+                            { label: 'Leave Requests Handled', value: auditLogs.filter(l => l.entityName === 'LeaveRequest').length },
                         ].map(item => (
                             <div key={item.label} style={styles.summaryItem}>
-                                <span style={styles.summaryIcon}>{item.icon}</span>
                                 <div>
                                     <p style={styles.summaryValue}>{item.value}</p>
                                     <p style={styles.summaryLabel}>{item.label}</p>

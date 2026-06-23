@@ -18,7 +18,6 @@ export default function Navbar() {
         <nav style={styles.nav}>
             <div style={styles.left}>
                 <div style={styles.brand}>
-                    <span style={styles.brandIcon}>📅</span>
                     <span style={styles.brandText}>LeaveMS</span>
                 </div>
                 <div style={styles.links}>
