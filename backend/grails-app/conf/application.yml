@@ -22,7 +22,7 @@ spring:
         host: smtp.gmail.com
         port: 587
         username: arshaq.kirmani@gmail.com
-        password: ohsx evwa ecxc afjk
+        password: ohsxevwaecxcafjk
         properties:
             mail:
                 smtp:
