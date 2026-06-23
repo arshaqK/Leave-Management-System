@@ -145,27 +145,6 @@ Access the app at `http://localhost:5173`.
 
 A sample data script is provided at the project root as `sample_data.sql`. It seeds realistic data including employees, leave requests, and audit logs across multiple departments.
 
-### What it includes
-
-| Data | Count |
-|------|-------|
-| Roles | 2 (Admin, Employee) |
-| Users | 6 (1 admin, 4 active employees, 1 inactive) |
-| Employees | 6 across 4 departments |
-| Leave Requests | 15 (mix of Approved, Pending, Rejected, Cancelled) |
-| Audit Logs | 20 entries |
-
-### Sample users
-
-| Username | Password | Role | Status |
-|----------|----------|------|--------|
-| admin | admin123 | Admin | Active |
-| employee1 | emp123 | Employee | Active |
-| employee2 | emp123 | Employee | Active |
-| employee3 | emp123 | Employee | Active |
-| employee4 | emp123 | Employee | Active |
-| employee5 | emp123 | Employee | Inactive |
-
 ### How to run
 
 > **Important:** Run the backend first at least once so GORM creates all the tables, then stop it before running the script.
@@ -220,17 +199,9 @@ npm run dev -- --host
 
 6. **Deactivation instead of deletion** — Employees are never deleted from the system. They are deactivated (status set to `Inactive`) to preserve historical leave data.
 
-7. **Email notifications are optional** — Email notifications are implemented but require valid Gmail SMTP credentials. If credentials are not configured, the system logs a warning and continues without sending emails.
+7. **CORS** — The backend is configured to accept requests from `http://localhost:5173` and `http://172.19.174.148:5173`. Update `grails-app/conf/spring/resources.groovy` if your frontend runs on a different origin.
 
-8. **Overlapping leave validation** — An employee cannot submit a new leave request that overlaps in dates with an existing Pending or Approved request.
-
-9. **End date validation** — The end date of a leave request must be on or after the start date.
-
-10. **Reason minimum length** — Leave request reasons must be at least 10 characters.
-
-11. **CORS** — The backend is configured to accept requests from `http://localhost:5173` and `http://172.19.174.148:5173`. Update `grails-app/conf/spring/resources.groovy` if your frontend runs on a different origin.
-
-12. **Session-based authentication** — The system uses Spring Security session cookies (JSESSIONID) for authentication. The React frontend sends credentials via form POST and maintains the session using `withCredentials: true` on all API calls.
+8. **Session-based authentication** — The system uses Spring Security session cookies (JSESSIONID) for authentication. The React frontend sends credentials via form POST and maintains the session using `withCredentials: true` on all API calls.
 
 ---
 
@@ -445,66 +416,7 @@ GET /api/dashboard/employee
 
 ---
 
-### Reports API
 
-```
-GET /api/reports
-```
-**Requires:** `ROLE_ADMIN`
-
-**Response:**
-```json
-{
-  "leavesByDepartment": [
-    { "department": "Engineering", "count": 8 },
-    { "department": "HR", "count": 3 }
-  ],
-  "leavesByMonth": [
-    { "month": 1, "count": 2 },
-    { "month": 8, "count": 5 }
-  ],
-  "topEmployees": [
-    { "fullName": "John Doe", "department": "Engineering", "count": 4 }
-  ]
-}
-```
-
-> Only **approved** leave requests are counted in all report figures.
-
----
-
-### Audit API
-
-#### Recent Audit Logs (last 10)
-```
-GET /api/audit
-```
-**Requires:** `ROLE_ADMIN`
-
-#### All Audit Logs
-```
-GET /api/audit/all
-```
-**Requires:** `ROLE_ADMIN`
-
-**Response:**
-```json
-[
-  {
-    "id": 1,
-    "entityName": "Employee",
-    "entityId": 3,
-    "action": "CREATE",
-    "performedBy": "admin",
-    "details": "Created employee: Jane Smith",
-    "dateCreated": "2026-06-22T10:30:00"
-  }
-]
-```
-
-**Action Types:** `CREATE`, `UPDATE`, `DELETE`
-
----
 
 ### HTTP Status Codes
 

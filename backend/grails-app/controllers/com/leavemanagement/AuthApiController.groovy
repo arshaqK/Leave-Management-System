@@ -25,4 +25,5 @@ class AuthApiController {
                 status    : employee?.status
         ] as JSON)
     }
+    
 }
